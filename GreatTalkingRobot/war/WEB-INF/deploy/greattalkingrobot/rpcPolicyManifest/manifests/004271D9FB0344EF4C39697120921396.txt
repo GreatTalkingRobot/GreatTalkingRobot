@@ -1,0 +1,2 @@
+serviceClass: edu.towson.cs.greattalkingrobot.client.GreetingService
+path: 7650191FF4C75B3EE73D2251D66EE705.gwt.rpc
