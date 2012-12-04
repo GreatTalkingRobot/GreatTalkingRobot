@@ -11,6 +11,17 @@
     <url-pattern>/greattalkingrobot/greet</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>SaveToFileServlet</servlet-name>
+    <servlet-class>edu.towson.cs.greattalkingrobot.server.SaveToFileServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SaveToFileServlet</servlet-name>
+    <url-pattern>/SaveToFile</url-pattern>
+  </servlet-mapping>
+  
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>GreatTalkingRobot.html</welcome-file>

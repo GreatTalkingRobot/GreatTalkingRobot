@@ -42,11 +42,17 @@ public class GreatTalkingRobot implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Say");
+		//final Button printButton = new Button("Print");
+
 		final TextBox nameField = new TextBox();
 		nameField.setText("");
 		nameField.setWidth("360px");
 		final Label errorLabel = new Label();
 		final TextArea resultArea=new TextArea();
+		resultArea.setWidth("800px");
+		resultArea.setHeight("300px");
+	
+		//resultArea.setReadOnly(true);
 
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
@@ -57,6 +63,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 		RootPanel.get("historyContainer").add(resultArea);
+		//RootPanel.get("printButtonContainer").add(printButton);
 
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
@@ -90,6 +97,7 @@ public class GreatTalkingRobot implements EntryPoint {
 			}
 		});
 
+		
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler {
 			/**
@@ -161,5 +169,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
+		
+		
 	}
 }
