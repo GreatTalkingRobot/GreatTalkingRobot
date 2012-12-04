@@ -39,9 +39,10 @@ public class GreatTalkingRobot implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Send");
+		final Button sendButton = new Button("Say");
 		final TextBox nameField = new TextBox();
-		nameField.setText("GWT User");
+		nameField.setText("");
+		nameField.setWidth("240px");
 		final Label errorLabel = new Label();
 
 		// We can add style names to widgets
@@ -59,7 +60,7 @@ public class GreatTalkingRobot implements EntryPoint {
 
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setText("Please chat with Matilda:");
+		dialogBox.setText("Tell Matilda:");
 		dialogBox.setAnimationEnabled(true);
 		final Button closeButton = new Button("Close");
 		// We can set the id of a widget by accessing its Element
@@ -70,7 +71,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		dialogVPanel.addStyleName("dialogVPanel");
 		dialogVPanel.add(new HTML("<b>Human:</b>"));
 		dialogVPanel.add(textToServerLabel);
-		dialogVPanel.add(new HTML("<br><b>Matilda replies:</b>"));
+		dialogVPanel.add(new HTML("<br><b>Matilda:</b>"));
 		dialogVPanel.add(serverResponseLabel);
 		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
 		dialogVPanel.add(closeButton);

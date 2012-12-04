@@ -123,27 +123,24 @@ public class RobotHelper {
 
 		
 		//get the answer part of html
-		int startingIndex=htmlContent.indexOf("<b>Human:</b>");
-		if(startingIndex<0){
-			throw new Exception("Cannot find the <b>Human:</b>");
-		}
-		String partString =htmlContent.substring(startingIndex);
+		int startingIndex=0;
+		
+		String partString =null;
 		
 		//get to the answer
-		startingIndex = partString.indexOf("<b>Matilda:</b>");
+		startingIndex = htmlContent.indexOf("<b>Matilda:</b>");
 		if(startingIndex<0){
 			throw new Exception("Cannot find the <b>Matilda:</b>");
 		}
 		startingIndex=startingIndex+"<b>Matilda:</b>".length();
-		partString=partString.substring(startingIndex).trim();
+		partString=htmlContent.substring(startingIndex).trim();
 		
 		
 		//remove the <br>
 		String result ="";
-		if(!partString.startsWith("<br>")){
-			throw new Exception("Invalid html.");
+		if(partString.startsWith("<br>")){
+			partString = partString.substring(4);
 		}
-		partString = partString.substring(4);
 		result=partString.substring(0, partString.indexOf("<br>"));
 		result=result.trim();
 		

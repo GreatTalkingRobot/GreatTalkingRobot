@@ -1,62 +1,84 @@
-<!doctype html>
-<!-- The DOCTYPE declaration above will set the     -->
-<!-- browser's rendering engine into                -->
-<!-- "Standards Mode". Replacing this declaration   -->
-<!-- with a "Quirks Mode" doctype is not supported. -->
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Le styles -->
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<style>
+body {
+	padding-top: 60px; /* 60px to make the container go all the way
+      to the bottom of the topbar */
+}
+</style>
+<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+      </script>
+    <![endif]-->
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="assets/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+	href="assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+	href="assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72"
+	href="assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed"
+	href="assets/ico/apple-touch-icon-57-precomposed.png">
+<style>
+undefined
+</style>
+</head>
 
-    <!--                                                               -->
-    <!-- Consider inlining CSS to reduce the number of requested files -->
-    <!--                                                               -->
-    <link type="text/css" rel="stylesheet" href="GreatTalkingRobot.css">
+<body>
+	<div class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand"> TU Virtual Interview Subject </a>
+				<ul class="nav">
+					<li><a href="http://greattalkingrobot.appspot.com"> Home </a>
+					</li>
+					<li><a href="about.html"> About </a></li>
+					<li><a id="chatId" href="chat.html"> Chat </a></li>
+					<li><a href="publications.html"> Publications </a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container">
 
-    <!--                                           -->
-    <!-- Any title is fine                         -->
-    <!--                                           -->
-    <title>Chat with Matilda</title>
-    
-    <!--                                           -->
-    <!-- This script loads your compiled module.   -->
-    <!-- If you add any GWT meta tags, they must   -->
-    <!-- be added before this line.                -->
-    <!--                                           -->
-    <script type="text/javascript" language="javascript" src="greattalkingrobot/greattalkingrobot.nocache.js"></script>
-  </head>
+		<div class="hero-unit" style="height: 600;">
+			<table align="center">
+				<tr>
+					<td colspan="2" style="font-weight: bold;">Tell Maltida:</td>
+				</tr>
+				<tr>
+					<td id="nameFieldContainer"></td>
+					<td id="sendButtonContainer"></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="color: red;" id="errorLabelContainer"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 
-  <!--                                           -->
-  <!-- The body can have arbitrary html, or      -->
-  <!-- you can leave the body empty if you want  -->
-  <!-- to create a completely dynamic UI.        -->
-  <!--                                           -->
-  <body>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+		
+	</script>
+	<script src="assets/js/bootstrap.js">
+		
+	</script>
+	<script type="text/javascript" language="javascript"
+		src="greattalkingrobot/greattalkingrobot.nocache.js"></script>
 
-    <!-- OPTIONAL: include this if you want history support -->
-    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
-    
-    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
-    <noscript>
-      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-        Your web browser must have JavaScript enabled
-        in order for this application to display correctly.
-      </div>
-    </noscript>
+</body>
 
-    <h1>Chat with Matilda:</h1>
-
-    <table align="center">
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Please enter your question to Maltida:</td>        
-      </tr>
-      <tr>
-        <td id="nameFieldContainer"></td>
-        <td id="sendButtonContainer"></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
-      </tr>
-    </table>
-  </body>
 </html>
