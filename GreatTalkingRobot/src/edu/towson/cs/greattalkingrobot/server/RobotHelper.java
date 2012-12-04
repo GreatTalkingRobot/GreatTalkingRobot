@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -36,6 +37,7 @@ public class RobotHelper {
 		String content =null;
 
 		StringBuffer result = null;
+		Charset chaset=null;
 		try {
 			siteUrl = new URL(url);
 			urlConnection = (URLConnection) siteUrl.openConnection();
@@ -54,8 +56,9 @@ public class RobotHelper {
 					out.close();
 				}
 			}
+			chaset =Charset.forName("UTF-8");
 			in = new BufferedReader(new InputStreamReader(
-					urlConnection.getInputStream()));
+					urlConnection.getInputStream(), chaset));
 			try {
 
 				result = new StringBuffer();

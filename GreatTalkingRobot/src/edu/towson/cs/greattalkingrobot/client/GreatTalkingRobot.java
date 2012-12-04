@@ -42,7 +42,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		final Button sendButton = new Button("Say");
 		final TextBox nameField = new TextBox();
 		nameField.setText("");
-		nameField.setWidth("240px");
+		nameField.setWidth("360px");
 		final Label errorLabel = new Label();
 
 		// We can add style names to widgets
@@ -112,7 +112,7 @@ public class GreatTalkingRobot implements EntryPoint {
 				errorLabel.setText("");
 				String textToServer = nameField.getText();
 				if (!FieldVerifier.isValidName(textToServer)) {
-					errorLabel.setText("Please enter at least four characters");
+					errorLabel.setText("Please enter some question");
 					return;
 				}
 
@@ -125,7 +125,7 @@ public class GreatTalkingRobot implements EntryPoint {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								dialogBox
-										.setText("Remote Procedure Call - Failure");
+										.setText("Unexpected error - Failure");
 								serverResponseLabel
 										.addStyleName("serverResponseLabelError");
 								serverResponseLabel.setHTML(SERVER_ERROR);
