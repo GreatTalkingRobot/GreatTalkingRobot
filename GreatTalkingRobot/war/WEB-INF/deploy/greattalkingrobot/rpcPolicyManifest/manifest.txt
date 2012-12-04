@@ -1,2 +1,3 @@
 # Module greattalkingrobot
 # RPC service class, partial path of RPC policy file
+edu.towson.cs.greattalkingrobot.client.GreetingService, 7650191FF4C75B3EE73D2251D66EE705.gwt.rpc
