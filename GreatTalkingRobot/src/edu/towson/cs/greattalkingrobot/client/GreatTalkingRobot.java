@@ -1,6 +1,5 @@
 package edu.towson.cs.greattalkingrobot.client;
 
-import edu.towson.cs.greattalkingrobot.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -14,8 +13,11 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import edu.towson.cs.greattalkingrobot.shared.FieldVerifier;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -44,6 +46,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		nameField.setText("");
 		nameField.setWidth("360px");
 		final Label errorLabel = new Label();
+		final TextArea resultArea=new TextArea();
 
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
@@ -53,6 +56,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		RootPanel.get("nameFieldContainer").add(nameField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
+		RootPanel.get("historyContainer").add(resultArea);
 
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
@@ -110,7 +114,7 @@ public class GreatTalkingRobot implements EntryPoint {
 			private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
-				String textToServer = nameField.getText();
+				final String textToServer = nameField.getText();
 				if (!FieldVerifier.isValidName(textToServer)) {
 					errorLabel.setText("Please enter some question");
 					return;
@@ -120,6 +124,7 @@ public class GreatTalkingRobot implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
+				
 				greetingService.greetServer(textToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
@@ -139,6 +144,13 @@ public class GreatTalkingRobot implements EntryPoint {
 										.removeStyleName("serverResponseLabelError");
 								serverResponseLabel.setHTML(result);
 								dialogBox.center();
+								
+								
+								
+								resultArea.setText(resultArea.getText()
+										+"\n\n"
+										+"Human: "+textToServer+"\n"
+										+"Matilda: "+result);
 								closeButton.setFocus(true);
 							}
 						});
