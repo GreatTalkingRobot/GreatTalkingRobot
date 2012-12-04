@@ -2,6 +2,7 @@ package edu.towson.cs.greattalkingrobot.server;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
@@ -12,7 +13,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.mortbay.log.Log;
+
+import com.ibm.icu.util.Calendar;
+import com.ibm.icu.util.TimeZone;
 
 
 public class RobotHelper {
@@ -149,5 +156,47 @@ public class RobotHelper {
 		
 		return result;
 	}
+	
+	public static String getCurrentTimestamp(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+		
+		return "";
+	}
 
+	
+
+	public static void flushfileToResponse(String content, HttpServletResponse response, String fileName)  throws Exception{
+        OutputStream out=null;
+        try{
+            System.setProperty("java.awt.headless", "true");
+    
+            out = response.getOutputStream();
+            response.setContentType("application/force-download");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+    
+            response.setHeader("Pragma", "public");
+            response.setHeader("Cache-control", "private");
+            if (content != null) {
+                out.write(content.getBytes());
+            } else {
+                out.write("".getBytes());
+            }
+    
+            out.flush();
+        }
+        catch(Exception e){
+            throw e;
+        }
+        finally{
+            if(out!=null){
+                try{
+                    out.close();
+                }
+                catch(Exception e){
+                    Log.info("error"+e.getMessage(),e);
+                }
+            }
+        }
+    }
 }
