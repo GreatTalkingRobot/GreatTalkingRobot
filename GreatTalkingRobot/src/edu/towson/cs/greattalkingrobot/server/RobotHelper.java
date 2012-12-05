@@ -202,4 +202,30 @@ public class RobotHelper {
             }
         }
     }
+	
+	public static String reorganize(String result) {
+		try {
+			if (result == null || result.isEmpty()) {
+				return "";
+			}
+			String[] listOfResult = result.split("Human:");
+			if (listOfResult == null || listOfResult.length == 0
+					|| listOfResult.length == 1) {
+				return result;
+			}
+
+			int count = listOfResult.length;
+			String reverse="";
+			while (count >=0) {
+				count--;
+				if(!listOfResult[count].isEmpty()){
+					reverse = reverse + "Human:" + listOfResult[count];
+				}
+			}
+			return reverse;
+		} catch (Exception e) {
+			return result;
+		}
+	}
+
 }

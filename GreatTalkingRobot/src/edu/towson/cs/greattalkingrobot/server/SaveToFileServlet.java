@@ -21,7 +21,7 @@ public class SaveToFileServlet extends HttpServlet {
 		//System.out.println("test");
 		try{
 			String result =request.getParameter(ConsistantValues.HISTROY_TEXT_AREA_NAME);
-			result = reOrganize(result);
+			result = RobotHelper.reorganize(result);
 			RobotHelper.flushfileToResponse(result, response, ConsistantValues.HISTROY_FILE_NAME);
 		}
 		catch(Exception e){
@@ -29,31 +29,5 @@ public class SaveToFileServlet extends HttpServlet {
 		}
 	}
 	
-	private String reOrganize(String result) {
-		try {
-			if (result == null || result.isEmpty()) {
-				return "";
-			}
-			String[] listOfResult = result.split("Human:");
-			if (listOfResult == null || listOfResult.length == 0
-					|| listOfResult.length == 1) {
-				return result;
-			}
-
-			int count = listOfResult.length;
-			String reverse = "Human:"+listOfResult[count-1]+"\n\n";
-			count--;
-
-			while (count >=1) {
-				count--;
-				if(!listOfResult[count].isEmpty()){
-					reverse = reverse + "Human:" + listOfResult[count];
-				}
-			}
-			return reverse;
-		} catch (Exception e) {
-			return result;
-		}
-	}
-
+	
 }
