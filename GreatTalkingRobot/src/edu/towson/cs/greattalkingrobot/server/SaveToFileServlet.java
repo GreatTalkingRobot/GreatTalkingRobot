@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class SaveToFileServlet extends HttpServlet {
 
@@ -18,6 +19,8 @@ public class SaveToFileServlet extends HttpServlet {
 		//request.getAttribute(arg0)
 		System.out.println("test");
 		try{
+			HttpSession s=request.getSession();
+			
 			RobotHelper.flushfileToResponse("test", response, "test.tex");
 		}
 		catch(Exception e){

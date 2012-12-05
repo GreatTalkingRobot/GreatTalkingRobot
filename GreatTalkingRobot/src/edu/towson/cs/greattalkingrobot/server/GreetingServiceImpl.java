@@ -3,9 +3,12 @@ package edu.towson.cs.greattalkingrobot.server;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 import edu.towson.cs.greattalkingrobot.client.GreetingService;
 import edu.towson.cs.greattalkingrobot.shared.FieldVerifier;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
  * The server side implementation of the RPC service.
@@ -38,6 +41,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 			
 			 finalResult = RobotHelper.getResultFromHtml(input, result);
 			System.out.println(finalResult);
+			HttpSession hs=getThreadLocalRequest().getSession();
 
 		}
 		catch(Exception e){

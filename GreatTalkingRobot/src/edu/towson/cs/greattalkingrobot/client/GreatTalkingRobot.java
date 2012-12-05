@@ -49,8 +49,8 @@ public class GreatTalkingRobot implements EntryPoint {
 		nameField.setWidth("360px");
 		final Label errorLabel = new Label();
 		final TextArea resultArea=new TextArea();
-		resultArea.setWidth("800px");
-		resultArea.setHeight("300px");
+		resultArea.setWidth("1200px");
+		resultArea.setHeight("200px");
 	
 		//resultArea.setReadOnly(true);
 
@@ -69,33 +69,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		nameField.setFocus(true);
 		nameField.selectAll();
 
-		// Create the popup dialog box
-		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setText("Tell Matilda:");
-		dialogBox.setAnimationEnabled(true);
-		final Button closeButton = new Button("Close");
-		// We can set the id of a widget by accessing its Element
-		closeButton.getElement().setId("closeButton");
-		final Label textToServerLabel = new Label();
-		final HTML serverResponseLabel = new HTML();
-		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Human:</b>"));
-		dialogVPanel.add(textToServerLabel);
-		dialogVPanel.add(new HTML("<br><b>Matilda:</b>"));
-		dialogVPanel.add(serverResponseLabel);
-		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		dialogVPanel.add(closeButton);
-		dialogBox.setWidget(dialogVPanel);
-
-		// Add a handler to close the DialogBox
-		closeButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				dialogBox.hide();
-				sendButton.setEnabled(true);
-				sendButton.setFocus(true);
-			}
-		});
+		
 
 		
 		// Create a handler for the sendButton and nameField
@@ -130,13 +104,42 @@ public class GreatTalkingRobot implements EntryPoint {
 
 				// Then, we send the input to the server.
 				sendButton.setEnabled(false);
-				textToServerLabel.setText(textToServer);
-				serverResponseLabel.setText("");
+				
 				
 				greetingService.greetServer(textToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
+								
+								// Create the popup dialog box
+								final DialogBox dialogBox = new DialogBox();
+								dialogBox.setText("Tell Matilda:");
+								dialogBox.setAnimationEnabled(true);
+								final Button closeButton = new Button("Close");
+								// We can set the id of a widget by accessing its Element
+								closeButton.getElement().setId("closeButton");
+								final Label textToServerLabel = new Label();
+								final HTML serverResponseLabel = new HTML();
+								VerticalPanel dialogVPanel = new VerticalPanel();
+								dialogVPanel.addStyleName("dialogVPanel");
+								dialogVPanel.add(new HTML("<b>Human:</b>"));
+								dialogVPanel.add(textToServerLabel);
+								dialogVPanel.add(new HTML("<br><b>Matilda:</b>"));
+								dialogVPanel.add(serverResponseLabel);
+								dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
+								dialogVPanel.add(closeButton);
+								dialogBox.setWidget(dialogVPanel);
+
+								// Add a handler to close the DialogBox
+								closeButton.addClickHandler(new ClickHandler() {
+									public void onClick(ClickEvent event) {
+										dialogBox.hide();
+										sendButton.setEnabled(true);
+										sendButton.setFocus(true);
+									}
+								});
+								textToServerLabel.setText(textToServer);
+								serverResponseLabel.setText("");
 								dialogBox
 										.setText("Unexpected error - Failure");
 								serverResponseLabel
@@ -147,19 +150,19 @@ public class GreatTalkingRobot implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
-								dialogBox.setText("Matilda Replied:");
-								serverResponseLabel
-										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
-								dialogBox.center();
 								
 								
 								
-								resultArea.setText(resultArea.getText()
-										+"\n\n"
-										+"Human: "+textToServer+"\n"
-										+"Matilda: "+result);
-								closeButton.setFocus(true);
+								resultArea.setText(
+										"Human: "+textToServer+"\n"
+										+"Matilda: "+result+"\n\n"
+										+resultArea.getText()
+										);
+								//closeButton.setFocus(true);
+								nameField.setText("");
+								nameField.setFocus(true);
+
+
 							}
 						});
 			}
