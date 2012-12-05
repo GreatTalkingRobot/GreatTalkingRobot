@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class SaveToFileServlet extends HttpServlet {
 
@@ -17,14 +16,39 @@ public class SaveToFileServlet extends HttpServlet {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//request.getAttribute(arg0)
-		System.out.println("test");
+		//System.out.println("test");
 		try{
-			HttpSession s=request.getSession();
-			
-			RobotHelper.flushfileToResponse("test", response, "test.tex");
+			String result =request.getParameter("histroy");
+			result = reOrganize(result);
+			RobotHelper.flushfileToResponse(result, response, "chatHistory.txt");
 		}
 		catch(Exception e){
-			
+			throw new ServletException("Failed to generate file:",e);
+		}
+	}
+	
+	private String reOrganize(String result) {
+		try {
+			if (result == null || result.isEmpty()) {
+				return "";
+			}
+			String[] listOfResult = result.split("Human:");
+			if (listOfResult == null || listOfResult.length == 0
+					|| listOfResult.length == 1) {
+				return result;
+			}
+
+			int count = listOfResult.length;
+			String reverse = "Human:"+listOfResult[count-1]+"\n\n";
+			count--;
+
+			while (count >=1) {
+				count--;
+				reverse = reverse + "Human:" + listOfResult[count];
+			}
+			return reverse;
+		} catch (Exception e) {
+			return result;
 		}
 	}
 

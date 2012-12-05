@@ -10,6 +10,7 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -42,18 +43,36 @@ public class GreatTalkingRobot implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Say");
-		//final Button printButton = new Button("Print");
 
 		final TextBox nameField = new TextBox();
 		nameField.setText("");
 		nameField.setWidth("360px");
 		final Label errorLabel = new Label();
+		
+		
+
 		final TextArea resultArea=new TextArea();
 		resultArea.setWidth("1100px");
 		resultArea.setHeight("200px");
+		resultArea.setName("histroy");
+		//resultArea.set
 	
-		resultArea.setReadOnly(true);
+		//resultArea.setReadOnly(true);
 		//resultArea.setStyleName(style)
+		final FormPanel formPan = new FormPanel();
+		formPan.setAction("/SaveToFile");
+	    formPan.setMethod(FormPanel.METHOD_POST);
+		VerticalPanel dialogVPanel = new VerticalPanel();
+		dialogVPanel.add(resultArea);
+		formPan.add(dialogVPanel);
+		
+
+	    // Add a 'submit' button.
+		dialogVPanel.add(new Button("Save To File", new ClickHandler() {
+	      public void onClick(ClickEvent event) {
+	        formPan.submit();
+	      }
+	    }));
 
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
@@ -63,7 +82,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		RootPanel.get("nameFieldContainer").add(nameField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
-		RootPanel.get("historyContainer").add(resultArea);
+		RootPanel.get("historyContainer").add(formPan);
 		//RootPanel.get("printButtonContainer").add(printButton);
 
 		// Focus the cursor on the name field when the app loads
