@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import edu.towson.cs.greattalkingrobot.client.GreetingService;
+import edu.towson.cs.greattalkingrobot.client.TalkingToRobotService;
 import edu.towson.cs.greattalkingrobot.shared.ConsistantValues;
 import edu.towson.cs.greattalkingrobot.shared.FieldVerifier;
 
@@ -13,8 +13,8 @@ import edu.towson.cs.greattalkingrobot.shared.FieldVerifier;
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class GreetingServiceImpl extends RemoteServiceServlet implements
-		GreetingService {
+public class TalkingToRobotServiceImpl extends RemoteServiceServlet implements
+		TalkingToRobotService {
 
 	public String askingRobot(String input) throws IllegalArgumentException {
 		// Verify that the input is valid. 

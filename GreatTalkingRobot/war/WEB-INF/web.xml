@@ -3,7 +3,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>edu.towson.cs.greattalkingrobot.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>edu.towson.cs.greattalkingrobot.server.TalkingToRobotServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
