@@ -34,9 +34,9 @@ public class GreatTalkingRobot implements EntryPoint {
 			+ "connection and try again.";
 
 	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
+	 * Create a remote service proxy to talk to the server-side talkingToRobot service.
 	 */
-	private final TalkingToRobotServiceAsync greetingService = GWT
+	private final TalkingToRobotServiceAsync talkingToRobotService = GWT
 			.create(TalkingToRobotService.class);
 
 	/**
@@ -127,7 +127,7 @@ public class GreatTalkingRobot implements EntryPoint {
 				sendButton.setEnabled(false);
 				
 				
-				greetingService.askingRobot(textToServer,
+				talkingToRobotService.askingRobot(textToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user

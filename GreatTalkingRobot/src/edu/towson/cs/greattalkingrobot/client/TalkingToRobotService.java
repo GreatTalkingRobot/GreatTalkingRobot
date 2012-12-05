@@ -6,7 +6,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 /**
  * The client side stub for the RPC service.
  */
-@RemoteServiceRelativePath("greet")
+@RemoteServiceRelativePath("askQuestion")
 public interface TalkingToRobotService extends RemoteService {
 	String askingRobot(String name) throws IllegalArgumentException;
 }
