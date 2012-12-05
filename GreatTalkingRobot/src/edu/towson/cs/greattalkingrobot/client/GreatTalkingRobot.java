@@ -55,7 +55,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		final TextArea resultArea=new TextArea();
 		resultArea.setWidth("1100px");
 		resultArea.setHeight("200px");
-		resultArea.setName("histroy");
+		resultArea.setName(ConsistantValues.HISTROY_TEXT_AREA_NAME);
 		//resultArea.set
 	
 		resultArea.setReadOnly(true);

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.towson.cs.greattalkingrobot.shared.ConsistantValues;
+
 public class SaveToFileServlet extends HttpServlet {
 
 	/**
@@ -18,9 +20,9 @@ public class SaveToFileServlet extends HttpServlet {
 		//request.getAttribute(arg0)
 		//System.out.println("test");
 		try{
-			String result =request.getParameter("histroy");
+			String result =request.getParameter(ConsistantValues.HISTROY_TEXT_AREA_NAME);
 			result = reOrganize(result);
-			RobotHelper.flushfileToResponse(result, response, "chatHistory.txt");
+			RobotHelper.flushfileToResponse(result, response, ConsistantValues.HISTROY_FILE_NAME);
 		}
 		catch(Exception e){
 			throw new ServletException("Failed to generate file:",e);
