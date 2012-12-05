@@ -44,7 +44,9 @@ public class SaveToFileServlet extends HttpServlet {
 
 			while (count >=1) {
 				count--;
-				reverse = reverse + "Human:" + listOfResult[count];
+				if(!listOfResult[count].isEmpty()){
+					reverse = reverse + "Human:" + listOfResult[count];
+				}
 			}
 			return reverse;
 		} catch (Exception e) {

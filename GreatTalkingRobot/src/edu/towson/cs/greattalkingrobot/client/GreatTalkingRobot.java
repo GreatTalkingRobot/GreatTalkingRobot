@@ -57,7 +57,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		resultArea.setName("histroy");
 		//resultArea.set
 	
-		//resultArea.setReadOnly(true);
+		resultArea.setReadOnly(true);
 		//resultArea.setStyleName(style)
 		final FormPanel formPan = new FormPanel();
 		formPan.setAction("/SaveToFile");
