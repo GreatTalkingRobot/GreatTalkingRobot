@@ -49,10 +49,11 @@ public class GreatTalkingRobot implements EntryPoint {
 		nameField.setWidth("360px");
 		final Label errorLabel = new Label();
 		final TextArea resultArea=new TextArea();
-		resultArea.setWidth("1200px");
+		resultArea.setWidth("1100px");
 		resultArea.setHeight("200px");
 	
-		//resultArea.setReadOnly(true);
+		resultArea.setReadOnly(true);
+		//resultArea.setStyleName(style)
 
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");

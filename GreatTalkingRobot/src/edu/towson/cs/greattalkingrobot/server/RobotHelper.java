@@ -153,7 +153,8 @@ public class RobotHelper {
 		}
 		result=partString.substring(0, partString.indexOf("<br>"));
 		result=result.trim();
-		
+		result  = result.replaceAll("\\s+", " ");
+
 		return result;
 	}
 	
