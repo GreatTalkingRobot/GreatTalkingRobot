@@ -181,6 +181,7 @@ public class GreatTalkingRobot implements EntryPoint {
 								//closeButton.setFocus(true);
 								nameField.setText("");
 								nameField.setFocus(true);
+								sendButton.setEnabled(false);
 
 
 							}
