@@ -3,11 +3,10 @@ package edu.towson.cs.greattalkingrobot.server;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.towson.cs.greattalkingrobot.client.GreetingService;
+import edu.towson.cs.greattalkingrobot.shared.ConsistantValues;
 import edu.towson.cs.greattalkingrobot.shared.FieldVerifier;
 
 /**
@@ -17,7 +16,7 @@ import edu.towson.cs.greattalkingrobot.shared.FieldVerifier;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
-	public String greetServer(String input) throws IllegalArgumentException {
+	public String askingRobot(String input) throws IllegalArgumentException {
 		// Verify that the input is valid. 
 		if (!FieldVerifier.isValidName(input)) {
 			// If the input is not valid, throw an IllegalArgumentException back to
@@ -26,23 +25,16 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 					"Name must be at least 4 characters long");
 		}
 
-		String serverInfo = getServletContext().getServerInfo();
-		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
+		
 
 		// Escape data from the client to avoid cross-site script vulnerabilities.
 		input = escapeHtml(input);
-		userAgent = escapeHtml(userAgent);
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("message", input);
 		String finalResult=null;
 		try{
-			StringBuffer result=RobotHelper.doSubmit("http://www.pandorabots.com/pandora/talk?botid=c340d2ec6e348c5f", data);
-			System.out.println(result);
-			
-			 finalResult = RobotHelper.getResultFromHtml(input, result);
-			System.out.println(finalResult);
-			HttpSession hs=getThreadLocalRequest().getSession();
-
+			StringBuffer result=RobotHelper.doSubmit(ConsistantValues.ROBOT_URL, data);
+			finalResult = RobotHelper.getResultFromHtml(input, result);
 		}
 		catch(Exception e){
 			throw new IllegalArgumentException("",e);

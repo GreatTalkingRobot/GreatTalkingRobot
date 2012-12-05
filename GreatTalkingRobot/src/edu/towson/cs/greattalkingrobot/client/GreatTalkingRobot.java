@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import edu.towson.cs.greattalkingrobot.shared.ConsistantValues;
 import edu.towson.cs.greattalkingrobot.shared.FieldVerifier;
 
 /**
@@ -126,14 +127,13 @@ public class GreatTalkingRobot implements EntryPoint {
 				sendButton.setEnabled(false);
 				
 				
-				greetingService.greetServer(textToServer,
+				greetingService.askingRobot(textToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								
 								// Create the popup dialog box
 								final DialogBox dialogBox = new DialogBox();
-								dialogBox.setText("Tell Matilda:");
 								dialogBox.setAnimationEnabled(true);
 								final Button closeButton = new Button("Close");
 								// We can set the id of a widget by accessing its Element
@@ -144,7 +144,7 @@ public class GreatTalkingRobot implements EntryPoint {
 								dialogVPanel.addStyleName("dialogVPanel");
 								dialogVPanel.add(new HTML("<b>Human:</b>"));
 								dialogVPanel.add(textToServerLabel);
-								dialogVPanel.add(new HTML("<br><b>Matilda:</b>"));
+								dialogVPanel.add(new HTML("<br><b>"+ConsistantValues.ROBOT_NAME+":</b>"));
 								dialogVPanel.add(serverResponseLabel);
 								dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
 								dialogVPanel.add(closeButton);
@@ -175,7 +175,7 @@ public class GreatTalkingRobot implements EntryPoint {
 								
 								resultArea.setText(
 										"Human: "+textToServer+"\n"
-										+"Matilda: "+result+"\n\n"
+										+ConsistantValues.ROBOT_NAME+": "+result+"\n\n"
 										+resultArea.getText()
 										);
 								//closeButton.setFocus(true);

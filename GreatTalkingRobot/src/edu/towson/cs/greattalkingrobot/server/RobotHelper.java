@@ -21,6 +21,8 @@ import org.mortbay.log.Log;
 import com.ibm.icu.util.Calendar;
 import com.ibm.icu.util.TimeZone;
 
+import edu.towson.cs.greattalkingrobot.shared.ConsistantValues;
+
 
 public class RobotHelper {
 	
@@ -138,11 +140,11 @@ public class RobotHelper {
 		String partString =null;
 		
 		//get to the answer
-		startingIndex = htmlContent.indexOf("<b>Matilda:</b>");
+		startingIndex = htmlContent.indexOf("<b>"+ConsistantValues.ROBOT_NAME+":</b>");
 		if(startingIndex<0){
-			throw new Exception("Cannot find the <b>Matilda:</b>");
+			throw new Exception("Cannot find the <b>"+ConsistantValues.ROBOT_NAME+":</b>");
 		}
-		startingIndex=startingIndex+"<b>Matilda:</b>".length();
+		startingIndex=startingIndex+("<b>"+ConsistantValues.ROBOT_NAME+":</b>").length();
 		partString=htmlContent.substring(startingIndex).trim();
 		
 		
