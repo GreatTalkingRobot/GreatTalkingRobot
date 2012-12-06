@@ -21,7 +21,7 @@ public class SaveToFileServlet extends HttpServlet {
 		//System.out.println("test");
 		try{
 			String result =request.getParameter(ConsistantValues.HISTROY_TEXT_AREA_NAME);
-			result = RobotHelper.reorganize(result);
+			//result = RobotHelper.reorganize(result);
 			RobotHelper.flushfileToResponse(result, response, ConsistantValues.HISTROY_FILE_NAME);
 		}
 		catch(Exception e){

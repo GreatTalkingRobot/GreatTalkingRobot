@@ -179,12 +179,18 @@ public class GreatTalkingRobot implements EntryPoint {
 										+html.getHTML()
 										);
 								
-								
-								hiddenDialog.setValue(
-										"Human: "+textToServer+"\n"
-										+ConsistantValues.ROBOT_NAME+": "+result+"\n\n"
-										+hiddenDialog.getValue()
+								if(hiddenDialog.getValue()==null||hiddenDialog.getValue().isEmpty()){
+									hiddenDialog.setValue(
+											"Human: "+textToServer+"\n"
+											+ConsistantValues.ROBOT_NAME+": "+result
+											);
+								}
+								else {
+									hiddenDialog.setValue(hiddenDialog.getValue()+"\n\n"
+										+"Human: "+textToServer+"\n"
+										+ConsistantValues.ROBOT_NAME+": "+result
 										);
+								}
 								//closeButton.setFocus(true);
 								questionFiled.setText("");
 								questionFiled.setFocus(true);
