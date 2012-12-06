@@ -67,11 +67,10 @@ public class GreatTalkingRobot implements EntryPoint {
 		hiddenDialog.setName(ConsistantValues.HISTROY_TEXT_AREA_NAME);
 		
 		//
-		final Label chatLabel=new Label();
-		chatLabel.setText("Chat History");
-		chatLabel.removeStyleName("gwt-Label");
-		chatLabel.addStyleName("H3");
-		dialogVPanel.add(chatLabel);
+		HTML htmltitle = new HTML();
+		htmltitle.setHTML("<h4>Chat History</h4>");
+		//chatLabel.addStyleName("H3");
+		dialogVPanel.add(htmltitle);
 		
 		final HTML html = new HTML();
 		html.setHTML("");
