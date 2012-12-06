@@ -47,14 +47,14 @@ public class GreatTalkingRobot implements EntryPoint {
 		//say button
 		final Button sayButton = new Button("Say");
 		sayButton.removeStyleName("gwt-Button");
-		sayButton.addStyleName("btn btn-inverse btn-small");
+		sayButton.addStyleName("btn btn-primary");
 
 		
 		//question filed
 		final TextBox questionFiled = new TextBox();
 		questionFiled.setText("");
 		questionFiled.removeStyleName("gwt-TextBox");
-		questionFiled.addStyleName("input-xlarge");
+		questionFiled.addStyleName("input-xxlarge");
 		final Label errorLabel = new Label();
 		
 		//Form
