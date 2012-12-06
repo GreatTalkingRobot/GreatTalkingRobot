@@ -69,6 +69,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		//
 		final Label chatLabel=new Label();
 		chatLabel.setText("Chat History");
+		chatLabel.addStyleName("H3");
 		dialogVPanel.add(chatLabel);
 		
 		final HTML html = new HTML();
