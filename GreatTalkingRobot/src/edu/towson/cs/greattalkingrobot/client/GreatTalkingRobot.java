@@ -61,12 +61,16 @@ public class GreatTalkingRobot implements EntryPoint {
 		final FormPanel formPan = new FormPanel();
 		formPan.setAction("/SaveToFile");
 	    formPan.setMethod(FormPanel.METHOD_POST);
-		VerticalPanel dialogVPanel = new VerticalPanel();
+		final VerticalPanel dialogVPanel = new VerticalPanel();
 
 		final Hidden hiddenDialog=new Hidden();
 		hiddenDialog.setName(ConsistantValues.HISTROY_TEXT_AREA_NAME);
 		
 		//
+		final Label chatLabel=new Label();
+		chatLabel.setText("Chat History");
+		dialogVPanel.add(chatLabel);
+		
 		final HTML html = new HTML();
 		html.setHTML("");
 		dialogVPanel.add(html);
@@ -80,6 +84,8 @@ public class GreatTalkingRobot implements EntryPoint {
 	        formPan.submit();
 	      }
 	    }));
+		
+		dialogVPanel.setVisible(false);
 
 
 		// Add the questionFiled and sayButton to the RootPanel
@@ -173,6 +179,9 @@ public class GreatTalkingRobot implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
+								if(!dialogVPanel.isVisible()){
+									dialogVPanel.setVisible(true);
+								}
 								html.setHTML(
 										"Human: "+textToServer+"<br>"
 										+ConsistantValues.ROBOT_NAME+": "+result+"<br><br>"
