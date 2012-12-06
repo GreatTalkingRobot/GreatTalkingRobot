@@ -53,12 +53,16 @@ public class GreatTalkingRobot implements EntryPoint {
 		
 
 		final TextArea resultArea=new TextArea();
-		resultArea.setWidth("1100px");
+		
 		resultArea.setHeight("200px");
 		resultArea.setName(ConsistantValues.HISTROY_TEXT_AREA_NAME);
 		//resultArea.set
 	
 		resultArea.setReadOnly(true);
+		resultArea.removeStyleName("gwt-TextArea");
+		resultArea.removeStyleName("gwt-TextArea-readonly");
+
+		resultArea.addStyleName("input-xxxlarge");
 		//resultArea.setStyleName(style)
 		final FormPanel formPan = new FormPanel();
 		formPan.setAction("/SaveToFile");
@@ -76,7 +80,9 @@ public class GreatTalkingRobot implements EntryPoint {
 	    }));
 
 		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
+		//sendButton.removeStyleName("sendingButton");
+		sendButton.removeStyleName("gwt-Button");
+		sendButton.addStyleName("btn btn-info btn-small");
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
