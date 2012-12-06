@@ -2842,6 +2842,7 @@ input[type="button"].btn-block {
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  vertical-align: top;
 }
 .btn-inverse:hover,
 .btn-inverse:active,
@@ -5249,6 +5250,7 @@ div.subnav-fixed {
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  vertical-align: top;
 }
 .btn-inverse:hover,
 .btn-inverse:active,

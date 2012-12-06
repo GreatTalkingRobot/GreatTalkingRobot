@@ -47,7 +47,9 @@ public class GreatTalkingRobot implements EntryPoint {
 
 		final TextBox nameField = new TextBox();
 		nameField.setText("");
-		nameField.setWidth("360px");
+		//nameField.setWidth("360px");
+		nameField.removeStyleName("gwt-TextBox");
+		nameField.addStyleName("input-xlarge");
 		final Label errorLabel = new Label();
 		
 		
@@ -82,7 +84,7 @@ public class GreatTalkingRobot implements EntryPoint {
 		// We can add style names to widgets
 		//sendButton.removeStyleName("sendingButton");
 		sendButton.removeStyleName("gwt-Button");
-		sendButton.addStyleName("btn btn-info btn-small");
+		sendButton.addStyleName("btn btn-inverse btn-small");
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
