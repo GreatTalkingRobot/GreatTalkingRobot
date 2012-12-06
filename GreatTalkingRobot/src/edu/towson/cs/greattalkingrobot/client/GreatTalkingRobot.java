@@ -12,9 +12,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Hidden;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -43,34 +43,34 @@ public class GreatTalkingRobot implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Say");
+		
+		//say button
+		final Button sayButton = new Button("Say");
+		sayButton.removeStyleName("gwt-Button");
+		sayButton.addStyleName("btn btn-inverse btn-small");
 
-		final TextBox nameField = new TextBox();
-		nameField.setText("");
-		//nameField.setWidth("360px");
-		nameField.removeStyleName("gwt-TextBox");
-		nameField.addStyleName("input-xlarge");
+		
+		//question filed
+		final TextBox questionFiled = new TextBox();
+		questionFiled.setText("");
+		questionFiled.removeStyleName("gwt-TextBox");
+		questionFiled.addStyleName("input-xlarge");
 		final Label errorLabel = new Label();
 		
-		
-
-		final TextArea resultArea=new TextArea();
-		
-		resultArea.setHeight("200px");
-		resultArea.setName(ConsistantValues.HISTROY_TEXT_AREA_NAME);
-		//resultArea.set
-	
-		resultArea.setReadOnly(true);
-		resultArea.removeStyleName("gwt-TextArea");
-		resultArea.removeStyleName("gwt-TextArea-readonly");
-
-		resultArea.addStyleName("input-xxxlarge");
-		//resultArea.setStyleName(style)
+		//Form
 		final FormPanel formPan = new FormPanel();
 		formPan.setAction("/SaveToFile");
 	    formPan.setMethod(FormPanel.METHOD_POST);
 		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.add(resultArea);
+
+		final Hidden hiddenDialog=new Hidden();
+		hiddenDialog.setName(ConsistantValues.HISTROY_TEXT_AREA_NAME);
+		
+		//
+		final HTML html = new HTML();
+		html.setHTML("");
+		dialogVPanel.add(html);
+		dialogVPanel.add(hiddenDialog);
 		formPan.add(dialogVPanel);
 		
 
@@ -81,37 +81,32 @@ public class GreatTalkingRobot implements EntryPoint {
 	      }
 	    }));
 
-		// We can add style names to widgets
-		//sendButton.removeStyleName("sendingButton");
-		sendButton.removeStyleName("gwt-Button");
-		sendButton.addStyleName("btn btn-inverse btn-small");
 
-		// Add the nameField and sendButton to the RootPanel
+		// Add the questionFiled and sayButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
-		RootPanel.get("sendButtonContainer").add(sendButton);
+		RootPanel.get("nameFieldContainer").add(questionFiled);
+		RootPanel.get("sendButtonContainer").add(sayButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 		RootPanel.get("historyContainer").add(formPan);
 		//RootPanel.get("printButtonContainer").add(printButton);
 
 		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
+		questionFiled.setFocus(true);
+		questionFiled.selectAll();
 
 		
-
 		
-		// Create a handler for the sendButton and nameField
+		// Create a handler for the sayButton and questionFiled
 		class MyHandler implements ClickHandler, KeyUpHandler {
 			/**
-			 * Fired when the user clicks on the sendButton.
+			 * Fired when the user clicks on the sayButton.
 			 */
 			public void onClick(ClickEvent event) {
 				sendNameToServer();
 			}
 
 			/**
-			 * Fired when the user types in the nameField.
+			 * Fired when the user types in the questionFiled.
 			 */
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
@@ -120,19 +115,19 @@ public class GreatTalkingRobot implements EntryPoint {
 			}
 
 			/**
-			 * Send the name from the nameField to the server and wait for a response.
+			 * Send the name from the questionFiled to the server and wait for a response.
 			 */
 			private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
-				final String textToServer = nameField.getText();
+				final String textToServer = questionFiled.getText();
 				if (!FieldVerifier.isValidName(textToServer)) {
 					errorLabel.setText("Please enter some question");
 					return;
 				}
 
 				// Then, we send the input to the server.
-				sendButton.setEnabled(false);
+				sayButton.setEnabled(false);
 				
 				
 				talkingToRobotService.askingRobot(textToServer,
@@ -162,8 +157,8 @@ public class GreatTalkingRobot implements EntryPoint {
 								closeButton.addClickHandler(new ClickHandler() {
 									public void onClick(ClickEvent event) {
 										dialogBox.hide();
-										sendButton.setEnabled(true);
-										sendButton.setFocus(true);
+										sayButton.setEnabled(true);
+										sayButton.setFocus(true);
 									}
 								});
 								textToServerLabel.setText(textToServer);
@@ -178,18 +173,22 @@ public class GreatTalkingRobot implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
+								html.setHTML(
+										"Human: "+textToServer+"<br>"
+										+ConsistantValues.ROBOT_NAME+": "+result+"<br><br>"
+										+html.getHTML()
+										);
 								
 								
-								
-								resultArea.setText(
+								hiddenDialog.setValue(
 										"Human: "+textToServer+"\n"
 										+ConsistantValues.ROBOT_NAME+": "+result+"\n\n"
-										+resultArea.getText()
+										+hiddenDialog.getValue()
 										);
 								//closeButton.setFocus(true);
-								nameField.setText("");
-								nameField.setFocus(true);
-								sendButton.setEnabled(true);
+								questionFiled.setText("");
+								questionFiled.setFocus(true);
+								sayButton.setEnabled(true);
 
 
 							}
@@ -199,8 +198,8 @@ public class GreatTalkingRobot implements EntryPoint {
 
 		// Add a handler to send the name to the server
 		MyHandler handler = new MyHandler();
-		sendButton.addClickHandler(handler);
-		nameField.addKeyUpHandler(handler);
+		sayButton.addClickHandler(handler);
+		questionFiled.addKeyUpHandler(handler);
 		
 		
 	}
