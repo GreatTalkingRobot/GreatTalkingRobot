@@ -45,7 +45,7 @@ public class GreatTalkingRobot implements EntryPoint {
 	public void onModuleLoad() {
 		
 		//say button
-		final Button sayButton = new Button("Say");
+		final Button sayButton = new Button("     Say     ");
 		sayButton.removeStyleName("gwt-Button");
 		sayButton.addStyleName("btn btn-primary");
 
