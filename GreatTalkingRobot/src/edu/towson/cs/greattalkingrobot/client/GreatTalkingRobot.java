@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Hidden;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -66,11 +67,14 @@ public class GreatTalkingRobot implements EntryPoint {
 		final Hidden hiddenDialog=new Hidden();
 		hiddenDialog.setName(ConsistantValues.HISTROY_TEXT_AREA_NAME);
 		
-		//
+		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		HTML htmltitle = new HTML();
 		htmltitle.setHTML("<h4>Chat History</h4>");
-		//chatLabel.addStyleName("H3");
-		dialogVPanel.add(htmltitle);
+		horizontalPanel.add(htmltitle);
+		
+		HTML emptyHtml = new HTML();
+		emptyHtml.setHTML("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		horizontalPanel.add(emptyHtml);
 		
 		 // Add a 'submit' button.
 		final Button saveButton = new Button("Save To File", new ClickHandler() {
@@ -80,7 +84,9 @@ public class GreatTalkingRobot implements EntryPoint {
 			    });
 		saveButton.removeStyleName("gwt-Button");
 		saveButton.addStyleName("btn btn-primary");
-		dialogVPanel.add(saveButton);
+		horizontalPanel.add(saveButton);
+		dialogVPanel.add(horizontalPanel);
+
 		
 		final HTML html = new HTML();
 		html.setHTML("");
