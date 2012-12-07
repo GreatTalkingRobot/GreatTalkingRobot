@@ -72,19 +72,22 @@ public class GreatTalkingRobot implements EntryPoint {
 		//chatLabel.addStyleName("H3");
 		dialogVPanel.add(htmltitle);
 		
+		 // Add a 'submit' button.
+		final Button saveButton = new Button("Save To File", new ClickHandler() {
+		      public void onClick(ClickEvent event) {
+			        formPan.submit();
+			      }
+			    });
+		saveButton.removeStyleName("gwt-Button");
+		saveButton.addStyleName("btn btn-primary");
+		dialogVPanel.add(saveButton);
+		
 		final HTML html = new HTML();
 		html.setHTML("");
 		dialogVPanel.add(html);
 		dialogVPanel.add(hiddenDialog);
 		formPan.add(dialogVPanel);
 		
-
-	    // Add a 'submit' button.
-		dialogVPanel.add(new Button("Save To File", new ClickHandler() {
-	      public void onClick(ClickEvent event) {
-	        formPan.submit();
-	      }
-	    }));
 		
 		dialogVPanel.setVisible(false);
 
