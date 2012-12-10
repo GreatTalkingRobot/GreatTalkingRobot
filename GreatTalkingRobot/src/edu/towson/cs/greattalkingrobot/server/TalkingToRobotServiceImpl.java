@@ -2,6 +2,10 @@ package edu.towson.cs.greattalkingrobot.server;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -15,6 +19,8 @@ import edu.towson.cs.greattalkingrobot.shared.FieldVerifier;
 @SuppressWarnings("serial")
 public class TalkingToRobotServiceImpl extends RemoteServiceServlet implements
 		TalkingToRobotService {
+    private static final Logger log = Logger.getLogger(TalkingToRobotServiceImpl.class.getName());
+
 
 	public String askingRobot(String input) throws IllegalArgumentException {
 		// Verify that the input is valid. 
@@ -25,6 +31,20 @@ public class TalkingToRobotServiceImpl extends RemoteServiceServlet implements
 					"Name must be at least 4 characters long");
 		}
 
+		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
+		log.info("UserAgent:***"+userAgent);
+		boolean noButtonShowing=false;
+		if(userAgent!=null){
+		    Pattern pIPad = Pattern.compile("iPad");
+		    Pattern pIphone = Pattern.compile("iPhone");
+
+		    Matcher m1 = pIPad.matcher(userAgent);
+		    Matcher m2 = pIphone.matcher(userAgent);
+
+			if(m1.find()||m2.find()){
+				noButtonShowing=true;
+			}
+		}
 		
 
 		// Escape data from the client to avoid cross-site script vulnerabilities.
@@ -38,6 +58,14 @@ public class TalkingToRobotServiceImpl extends RemoteServiceServlet implements
 		}
 		catch(Exception e){
 			throw new IllegalArgumentException("",e);
+		}
+		if(finalResult!=null){
+			if(noButtonShowing){
+				finalResult="0"+finalResult;
+			}
+			else{
+				finalResult ="1"+finalResult;
+			}
 		}
 		return  finalResult;
 	}

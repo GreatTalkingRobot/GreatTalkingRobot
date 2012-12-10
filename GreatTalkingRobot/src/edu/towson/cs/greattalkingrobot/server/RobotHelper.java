@@ -52,6 +52,7 @@ public class RobotHelper {
 			urlConnection = (URLConnection) siteUrl.openConnection();
 			urlConnection.setDoOutput(true);
 			urlConnection.setDoInput(true);
+			urlConnection.setConnectTimeout(60000);
 			try{
 				out = new OutputStreamWriter(
 						urlConnection.getOutputStream());

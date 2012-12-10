@@ -109,8 +109,9 @@ public class GreatTalkingRobot implements EntryPoint {
 		// Focus the cursor on the name field when the app loads
 		questionFiled.setFocus(true);
 		questionFiled.selectAll();
-
 		
+		
+
 		
 		// Create a handler for the sayButton and questionFiled
 		class MyHandler implements ClickHandler, KeyUpHandler {
@@ -189,8 +190,21 @@ public class GreatTalkingRobot implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
+								boolean showingButton=true;
+								if(result!=null){
+									if(result.startsWith("0")){
+										showingButton=false;
+									}
+								}
+								if(result!=null&&result.length()>1){
+									result = result.substring(1);
+								}
 								if(!dialogVPanel.isVisible()){
 									dialogVPanel.setVisible(true);
+									if(!showingButton){
+										saveButton.setVisible(false);
+									}
+									
 								}
 								html.setHTML(
 										"Human: "+textToServer+"<br>"
